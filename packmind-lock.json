@@ -1,0 +1,161 @@
+{
+  "lockfileVersion": 2,
+  "packageSlugs": [
+    "@global/packmind-standards"
+  ],
+  "agents": [
+    "agents_md",
+    "copilot",
+    "packmind"
+  ],
+  "targetId": "5a5f350c-090b-4027-be7b-e5b55bd1a7b2",
+  "artifacts": {
+    "user:command:create-api-service": {
+      "name": "Create api service",
+      "type": "command",
+      "id": "c6fbdab6-895a-4994-ab94-ef56e807dfd1",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/prompts/create-api-service.prompt.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/commands/create-api-service.md",
+          "agent": "packmind"
+        }
+      ]
+    },
+    "user:command:create-custom-hook": {
+      "name": "Create custom hook",
+      "type": "command",
+      "id": "d21537aa-9703-492b-9ae7-6a964c31b8cb",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/prompts/create-custom-hook.prompt.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/commands/create-custom-hook.md",
+          "agent": "packmind"
+        }
+      ]
+    },
+    "user:command:create-fetch-hook": {
+      "name": "Create fetch hook",
+      "type": "command",
+      "id": "43f6e18b-9530-4daf-867f-8db564d8a18f",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/prompts/create-fetch-hook.prompt.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/commands/create-fetch-hook.md",
+          "agent": "packmind"
+        }
+      ]
+    },
+    "user:command:create-list-page": {
+      "name": "Create list page",
+      "type": "command",
+      "id": "d6e0d94c-f888-4ab9-9598-8f94e411458c",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/prompts/create-list-page.prompt.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/commands/create-list-page.md",
+          "agent": "packmind"
+        }
+      ]
+    },
+    "user:command:create-react-component": {
+      "name": "Create react component",
+      "type": "command",
+      "id": "69fa450c-dffc-44b5-9fae-5cf182687ff4",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/prompts/create-react-component.prompt.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/commands/create-react-component.md",
+          "agent": "packmind"
+        }
+      ]
+    },
+    "user:standard:client-side-security": {
+      "name": "Client-Side Security",
+      "type": "standard",
+      "id": "bbe684a8-18b0-46da-bcbc-d87b965a3b70",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/instructions/packmind-client-side-security.instructions.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/standards/client-side-security.md",
+          "agent": "packmind"
+        }
+      ]
+    },
+    "user:standard:react-component-responsibility": {
+      "name": "React Component Responsibility",
+      "type": "standard",
+      "id": "d938f938-83f8-4cf9-8c1d-2246b79484b7",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/instructions/packmind-react-component-responsibility.instructions.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/standards/react-component-responsibility.md",
+          "agent": "packmind"
+        }
+      ]
+    }
+  }
+}
