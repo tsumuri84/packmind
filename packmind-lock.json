@@ -31,6 +31,27 @@
         }
       ]
     },
+    "user:command:create-card-component-tmp": {
+      "name": "Create card component tmp",
+      "type": "command",
+      "id": "bce910d1-ff09-4587-a51f-ed57fc7e1609",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/prompts/create-card-component-tmp.prompt.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/commands/create-card-component-tmp.md",
+          "agent": "packmind"
+        }
+      ]
+    },
     "user:command:create-custom-hook": {
       "name": "Create custom hook",
       "type": "command",
@@ -48,6 +69,27 @@
         },
         {
           "path": ".packmind/commands/create-custom-hook.md",
+          "agent": "packmind"
+        }
+      ]
+    },
+    "user:command:create-entity-type-tmp": {
+      "name": "Create entity type tmp",
+      "type": "command",
+      "id": "ffbbd943-c335-4b07-8b23-170cab6f8d78",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/prompts/create-entity-type-tmp.prompt.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".packmind/commands/create-entity-type-tmp.md",
           "agent": "packmind"
         }
       ]
