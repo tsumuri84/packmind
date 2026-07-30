@@ -157,6 +157,28 @@
         }
       ]
     },
+    "user:skill:create-react-feature": {
+      "name": "create-react-feature",
+      "type": "skill",
+      "id": "b972608f-96f9-420c-8fce-f395f66abb4b",
+      "version": 1,
+      "spaceId": "60b7d510-4b4b-47b6-99ea-9dc028657426",
+      "packageIds": [
+        "35fec069-718f-40cf-aae9-87ecfa7f49d4"
+      ],
+      "source": "user",
+      "files": [
+        {
+          "path": ".github/skills/create-react-feature/references/service-pattern.md",
+          "agent": "copilot"
+        },
+        {
+          "path": ".github/skills/create-react-feature/SKILL.md",
+          "agent": "copilot",
+          "isSkillDefinition": true
+        }
+      ]
+    },
     "user:standard:client-side-security": {
       "name": "Client-Side Security",
       "type": "standard",
