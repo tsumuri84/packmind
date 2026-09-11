@@ -14,16 +14,21 @@ const FONTS =
 const DISPLAY = "font-['Fraunces',_Georgia,_'Times_New_Roman',_serif]";
 const TEXT = "font-['Archivo',_ui-sans-serif,_system-ui,_sans-serif]";
 
+const photo = (id: string, crop = '') => {
+  const url = (w: number) =>
+    `https://images.unsplash.com/photo-${id}?q=80&w=${w}${crop}`;
+  return {
+    src: url(1200),
+    srcSet: [480, 768, 1200, 1800].map((w) => `${url(w)} ${w}w`).join(', '),
+  };
+};
+
 const IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=1400',
-  terroir:
-    'https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=1100&h=1400&fit=crop&crop=entropy',
-  huile:
-    'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=600&h=750&fit=crop&crop=entropy',
-  baume:
-    'https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=600&h=750&fit=crop&crop=top',
-  infusion:
-    'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=600&h=750&fit=crop&crop=top',
+  hero: photo('1502047805166-5080c59a3994'),
+  terroir: photo('1469122312224-c5846569feb1', '&fit=crop&crop=entropy'),
+  huile: photo('1502047805166-5080c59a3994', '&fit=crop&crop=entropy'),
+  baume: photo('1469122312224-c5846569feb1', '&fit=crop&crop=top'),
+  infusion: photo('1502047805166-5080c59a3994', '&fit=crop&crop=top'),
 };
 
 const FICHE = [
@@ -227,7 +232,8 @@ function Hero() {
           className="relative"
         >
           <img
-            src={IMAGES.hero}
+            {...IMAGES.hero}
+            sizes="(min-width: 1024px) 42vw, 100vw"
             alt="Rangs de culture sur les hauteurs d’Apt à la fin du jour"
             className="aspect-[4/5] w-full object-cover lg:aspect-[3/4]"
           />
@@ -285,7 +291,8 @@ function Terroir() {
         <div className="overflow-hidden">
           <motion.img
             style={{ y }}
-            src={IMAGES.terroir}
+            {...IMAGES.terroir}
+            sizes="(min-width: 1024px) 40vw, 100vw"
             alt="Sols ocre et végétation sèche du plateau du Luberon"
             className="aspect-[3/4] w-full scale-105 object-cover"
           />
@@ -402,7 +409,8 @@ function Gamme() {
             <article className="grid grid-cols-1 gap-6 border-b border-[#1C231F]/15 py-8 sm:grid-cols-12 sm:items-center sm:gap-8">
               <div className="sm:col-span-3 lg:col-span-2">
                 <img
-                  src={product.image}
+                  {...product.image}
+                  sizes="(min-width: 1024px) 9rem, 7rem"
                   alt={product.alt}
                   className="aspect-[4/5] w-28 max-w-[9rem] object-cover sm:w-full"
                 />
@@ -504,7 +512,7 @@ function Engagement() {
                 <dt className="text-[0.8125rem] text-[#F2EFE9]/75">
                   Teneur THC
                 </dt>
-                <dd className="text-[0.8125rem] tabular-nums">&lt; 0,3 %</dd>
+                <dd className="text-[0.8125rem] tabular-nums">&lt; 0,3 %</dd>
               </div>
             </dl>
           </Reveal>
@@ -594,6 +602,13 @@ export default function HerbeHarmonieLanding() {
     >
       <style>{FONTS}</style>
 
+      <a
+        href="#contenu"
+        className={`${TEXT} sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-[#1C231F] focus:px-5 focus:py-3 focus:text-[0.8125rem] focus:uppercase focus:tracking-[0.12em] focus:text-[#F2EFE9]`}
+      >
+        Aller au contenu
+      </a>
+
       <header className="border-b border-[#1C231F]/15">
         <div className="flex items-baseline justify-between px-6 py-5 sm:px-10">
           <a href="#" className={`${DISPLAY} text-[1.0625rem] font-semibold tracking-[-0.01em]`}>
@@ -614,13 +629,15 @@ export default function HerbeHarmonieLanding() {
         </div>
       </header>
 
-      <Hero />
-      <Marquee />
-      <Terroir />
-      <Methode />
-      <Gamme />
-      <Engagement />
-      <Newsletter />
+      <main id="contenu">
+        <Hero />
+        <Marquee />
+        <Terroir />
+        <Methode />
+        <Gamme />
+        <Engagement />
+        <Newsletter />
+      </main>
 
       <footer className="px-6 py-16 sm:px-10">
         <div className="grid grid-cols-2 gap-10 text-[0.875rem] lg:grid-cols-4">
@@ -668,7 +685,7 @@ export default function HerbeHarmonieLanding() {
 
         <div className="mt-16 flex flex-col gap-2 border-t border-[#1C231F]/15 pt-6 text-[0.75rem] text-[#1C231F]/70 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Herbe &amp; Harmonie</span>
-          <span>THC &lt; 0,3 %. Vente interdite aux mineurs.</span>
+          <span>THC &lt; 0,3 %. Vente interdite aux mineurs.</span>
         </div>
       </footer>
     </div>

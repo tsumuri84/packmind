@@ -12,10 +12,18 @@ const TEXT = "font-['Archivo',_ui-sans-serif,_system-ui,_sans-serif]";
 
 const GREEN = '#2C4A3E';
 
+const photo = (id: string, crop = '') => {
+  const url = (w: number) =>
+    `https://images.unsplash.com/photo-${id}?q=80&w=${w}${crop}`;
+  return {
+    src: url(900),
+    srcSet: [480, 768, 1200].map((w) => `${url(w)} ${w}w`).join(', '),
+  };
+};
+
 const IMAGES = {
-  spa: 'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=900&h=1200&fit=crop&crop=entropy',
-  coffret:
-    'https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=900&h=1200&fit=crop&crop=top',
+  spa: photo('1502047805166-5080c59a3994', '&fit=crop&crop=entropy'),
+  coffret: photo('1469122312224-c5846569feb1', '&fit=crop&crop=top'),
 };
 
 const SEGMENTS = [
@@ -26,7 +34,7 @@ const SEGMENTS = [
 ];
 
 const METRICS = [
-  { value: '100%', label: 'Cultivé & extrait en France' },
+  { value: '100 %', label: 'Cultivé & extrait en France' },
   { value: '+50', label: 'Partenaires indépendants' },
   { value: '48h', label: 'Livraison sur-mesure' },
 ];
@@ -71,7 +79,7 @@ const SERVICES = [
   {
     title: 'Formation de vos équipes',
     detail:
-      'Une demi-journée sur site ou au domaine : origine, cadre légal, argumentaire de vente et limites à ne pas franchir devant un client.',
+      'Une demi-journée sur site ou au domaine : origine, cadre légal, argumentaire de vente et limites à ne pas franchir devant un client.',
   },
 ];
 
@@ -249,7 +257,8 @@ function CaseStudies() {
                 }`}
               >
                 <img
-                  src={item.image}
+                  {...item.image}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
                   alt={item.alt}
                   className="aspect-[3/4] w-full object-cover"
                 />
@@ -525,6 +534,13 @@ export default function HerbeHarmonieB2B() {
     >
       <style>{FONTS}</style>
 
+      <a
+        href="#contenu"
+        className={`${TEXT} sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-[#1C231F] focus:px-5 focus:py-3 focus:text-[0.8125rem] focus:uppercase focus:tracking-[0.12em] focus:text-[#F2EFE9]`}
+      >
+        Aller au contenu
+      </a>
+
       <header className="border-b border-[#1C231F]/20">
         <div className="flex items-baseline justify-between px-6 py-5 sm:px-10">
           <a
@@ -550,11 +566,13 @@ export default function HerbeHarmonieB2B() {
         </div>
       </header>
 
-      <Hero />
-      <Metrics />
-      <CaseStudies />
-      <Services />
-      <Contact />
+      <main id="contenu">
+        <Hero />
+        <Metrics />
+        <CaseStudies />
+        <Services />
+        <Contact />
+      </main>
 
       <footer className="px-6 py-12 sm:px-10">
         <div
@@ -564,7 +582,7 @@ export default function HerbeHarmonieB2B() {
             © {new Date().getFullYear()} Herbe &amp; Harmonie — Espace
             professionnel
           </span>
-          <span>THC &lt; 0,3 %. Vente interdite aux mineurs.</span>
+          <span>THC &lt; 0,3 %. Vente interdite aux mineurs.</span>
         </div>
       </footer>
     </div>
