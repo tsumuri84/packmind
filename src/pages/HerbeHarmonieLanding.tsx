@@ -7,31 +7,31 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
-import {
-  ArrowRight,
-  ArrowUpRight,
-  MapPin,
-  Plus,
-  ShoppingBag,
-  Sun,
-} from 'lucide-react';
+
+const FONTS =
+  "@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap');";
+
+const DISPLAY = "font-['Fraunces',_Georgia,_'Times_New_Roman',_serif]";
+const TEXT = "font-['Archivo',_ui-sans-serif,_system-ui,_sans-serif]";
 
 const IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=1200',
+  hero: 'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=1400',
   terroir:
-    'https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=1000&h=1300&fit=crop&crop=entropy',
+    'https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=1100&h=1400&fit=crop&crop=entropy',
   huile:
-    'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=800&h=1000&fit=crop&crop=entropy',
+    'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=600&h=750&fit=crop&crop=entropy',
   baume:
-    'https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=800&h=1000&fit=crop&crop=top',
+    'https://images.unsplash.com/photo-1469122312224-c5846569feb1?q=80&w=600&h=750&fit=crop&crop=top',
   infusion:
-    'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=800&h=1000&fit=crop&crop=top',
+    'https://images.unsplash.com/photo-1502047805166-5080c59a3994?q=80&w=600&h=750&fit=crop&crop=top',
 };
 
-const STATS = [
-  { value: '420 m', label: "Altitude d'implantation" },
-  { value: '100 %', label: 'Récolte à la main' },
-  { value: '48 h', label: 'Du champ au flacon' },
+const FICHE = [
+  { label: 'Parcelles', value: 'Claparèdes, Sault, Roussillon' },
+  { label: 'Altitude', value: '380 à 460 m' },
+  { label: 'Récolte', value: 'Manuelle, septembre à octobre' },
+  { label: 'Extraction', value: 'CO₂ supercritique, 18 °C' },
+  { label: 'Délai champ-flacon', value: '48 heures' },
 ];
 
 const PROCESS = [
@@ -39,82 +39,68 @@ const PROCESS = [
     step: '01',
     title: 'Semis en terrasses',
     detail:
-      'Des parcelles de restanques exposées plein sud, sur les sols ocre d’Apt.',
+      'Des restanques exposées plein sud, sur les sols ocre au nord d’Apt. Densité volontairement basse, sans irrigation d’appoint.',
   },
   {
     step: '02',
     title: 'Récolte manuelle',
     detail:
-      'Coupe sélective à la serpette, fleur par fleur, entre septembre et octobre.',
+      'Coupe sélective à la serpette, fleur par fleur, en trois passages entre la mi-septembre et la fin octobre.',
   },
   {
     step: '03',
     title: 'Extraction à froid',
     detail:
-      'CO₂ supercritique sous 18 °C pour préserver terpènes et cannabinoïdes.',
+      'CO₂ supercritique maintenu sous 18 °C, pour garder les terpènes que la distillation à chaud détruit.',
   },
   {
     step: '04',
     title: 'Mise en flacon',
     detail:
-      'Conditionnement en verre ambré, numéroté par lot et analysé en laboratoire.',
+      'Verre ambré, numéroté par lot, accompagné de son analyse de laboratoire consultable en ligne.',
   },
 ];
 
 const PRODUCTS = [
   {
-    name: 'Huile Botanique 10%',
+    ref: 'HB-10',
+    name: 'Huile Botanique',
+    strength: '10 %',
     origin: 'Parcelle des Claparèdes',
-    tag: 'RÉCOLTE 2026',
-    price: '54€',
+    note: 'Résineuse, poivrée, longue en bouche. Sublinguale, matin ou soir.',
     volume: '30 ml',
+    price: '54 €',
     image: IMAGES.huile,
-    alt: 'Flacon d’huile botanique posé sur la terre ocre du Luberon',
+    alt: 'Flacon d’huile botanique sur la terre ocre du Luberon',
   },
   {
+    ref: 'BR-02',
     name: 'Baume Racines',
+    strength: '4 %',
     origin: 'Plateau de Sault',
-    tag: 'TERROIR',
-    price: '38€',
+    note: 'Cire d’abeille et huile d’olive du moulin voisin. Pour les mains et les articulations.',
     volume: '50 ml',
+    price: '38 €',
     image: IMAGES.baume,
     alt: 'Baume artisanal et végétation sèche du plateau de Sault',
   },
   {
+    ref: 'IS-01',
     name: 'Infusion Sérénité',
+    strength: '2 %',
     origin: 'Vallon de Roussillon',
-    tag: 'ÉDITION LIMITÉE',
-    price: '24€',
+    note: 'Fleurs entières, verveine et camomille. Infusion longue, dix minutes.',
     volume: '80 g',
+    price: '24 €',
     image: IMAGES.infusion,
     alt: 'Fleurs séchées destinées à l’infusion, vallon de Roussillon',
   },
 ];
 
 const MARQUEE_TEXT =
-  '100% NATUREL • RÉCOLTE ARTISANALE DANS LE LUBERON • CIRCUIT COURT • ';
+  '100% naturel — Récolte artisanale dans le Luberon — Circuit court — ';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-const DISPLAY_XL = 'text-[clamp(2.25rem,5.6vw,6rem)]';
-const DISPLAY_M = 'text-[clamp(1.75rem,4vw,3rem)]';
-
-function DisplayLine({ text, delay }: { text: string; delay: number }) {
-  const reduce = useReducedMotion();
-
-  return (
-    <span className="block overflow-hidden pb-[0.08em]">
-      <motion.span
-        className="block break-words"
-        initial={reduce ? { opacity: 0 } : { y: '112%' }}
-        animate={reduce ? { opacity: 1 } : { y: '0%' }}
-        transition={{ duration: 1.1, delay, ease: EASE }}
-      >
-        {text}
-      </motion.span>
-    </span>
-  );
-}
 
 function Reveal({
   children,
@@ -130,122 +116,129 @@ function Reveal({
   return (
     <motion.div
       className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
+      transition={{ duration: 0.8, delay, ease: EASE }}
     >
       {children}
     </motion.div>
   );
 }
 
-function Eyebrow({ index, label }: { index: string; label: string }) {
+function SectionHead({
+  label,
+  title,
+  className = '',
+}: {
+  label: string;
+  title: string;
+  className?: string;
+}) {
   return (
-    <p className="mb-6 flex items-center gap-4 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-[0.28em] text-[#1C231F]/70">
-      <span className="text-[#C48B5E]">{index}</span>
-      <span className="h-px w-12 bg-[#1C231F]/25" />
-      <span>{label}</span>
-    </p>
-  );
-}
-
-function HarvestSeal() {
-  const reduce = useReducedMotion();
-
-  return (
-    <div
-      aria-hidden="true"
-      className="relative h-24 w-24 rounded-full bg-[#5A7160] shadow-[0_18px_40px_-18px_rgba(28,35,31,0.55)] lg:h-28 lg:w-28"
-    >
-      <motion.svg
-        viewBox="0 0 100 100"
-        className="h-full w-full"
-        animate={reduce ? undefined : { rotate: 360 }}
-        transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
+    <div className={className}>
+      <p
+        className={`${TEXT} mb-5 text-[0.6875rem] uppercase tracking-[0.2em] text-[#1C231F]/70`}
       >
-        <defs>
-          <path
-            id="harvest-seal-path"
-            fill="none"
-            d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0"
-          />
-        </defs>
-        <text
-          className="fill-[#F2EFE9] text-[7.5px] uppercase"
-          style={{ fontFamily: 'Inter, ui-sans-serif, sans-serif' }}
-        >
-          <textPath
-            href="#harvest-seal-path"
-            startOffset="0%"
-            textLength="219"
-            lengthAdjust="spacing"
-          >
-            Récolte 2026 • Apt • Luberon •
-          </textPath>
-        </text>
-      </motion.svg>
-      <Sun
-        strokeWidth={1.2}
-        className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-[#F2EFE9]"
-      />
+        {label}
+      </p>
+      <h2
+        className={`${DISPLAY} max-w-xl text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold leading-[1.08] tracking-[-0.01em]`}
+      >
+        {title}
+      </h2>
     </div>
   );
 }
 
-function HeroVisual() {
+function Hero() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, -48]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 60]);
 
   return (
-    <div ref={ref} className="relative">
-      <motion.div
-        style={{ y }}
-        initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.4, ease: EASE }}
-        className="relative overflow-hidden rounded-t-full border border-[#1C231F]/10"
-      >
-        <img
-          src={IMAGES.hero}
-          alt="Collines et champs de Provence dans la lumière de fin de journée"
-          className="aspect-[4/5] w-full object-cover lg:aspect-[3/4]"
-        />
+    <section
+      ref={ref}
+      className="grid grid-cols-1 items-end gap-14 border-b border-[#1C231F]/15 lg:grid-cols-12 lg:gap-0"
+    >
+      <div className="px-6 pt-16 sm:px-10 lg:col-span-7 lg:pb-24 lg:pr-16 lg:pt-28">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className={`${TEXT} mb-10 text-[0.6875rem] uppercase tracking-[0.2em] text-[#1C231F]/70`}
+        >
+          Domaine artisanal — Apt, Vaucluse
+        </motion.p>
+
+        <motion.h1
+          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: EASE }}
+          className={`${DISPLAY} text-[clamp(2.75rem,6.2vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.02em]`}
+        >
+          L’or vert
+          <br />
+          du Luberon
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
+          className={`${TEXT} mt-10 max-w-md text-[0.9375rem] leading-[1.75] text-[#1C231F]/80`}
+        >
+          Trois parcelles sur les hauteurs d’Apt, récoltées à la main et
+          extraites à froid dans les quarante-huit heures. Une seule récolte par
+          an, tracée du rang au flacon.
+        </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.85, ease: EASE }}
-          className="absolute inset-x-4 bottom-4 flex items-center gap-3 bg-[#F2EFE9]/95 px-4 py-3 backdrop-blur-sm sm:inset-x-auto sm:left-6 sm:bottom-6 sm:px-5 sm:py-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: EASE }}
+          className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-5"
         >
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#C48B5E]">
-            <MapPin className="h-4 w-4 text-[#F2EFE9]" strokeWidth={2.4} />
-          </span>
-          <span className="font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] leading-tight">
-            <span className="block text-xs font-semibold uppercase tracking-[0.18em]">
-              Récolté près d&apos;Apt
-            </span>
-            <span className="mt-1 block text-xs text-[#1C231F]/70">
-              Vaucluse, France
-            </span>
-          </span>
+          <a
+            href="#gamme"
+            className={`${TEXT} bg-[#1C231F] px-8 py-4 text-[0.8125rem] font-medium uppercase tracking-[0.12em] text-[#F2EFE9] transition-colors duration-200 hover:bg-[#5A7160] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A7160]`}
+          >
+            Voir la gamme
+          </a>
+          <a
+            href="#terroir"
+            className={`${TEXT} border-b border-[#1C231F]/40 pb-1 text-[0.8125rem] font-medium uppercase tracking-[0.12em] transition-colors duration-200 hover:border-[#1C231F]`}
+          >
+            Le domaine
+          </a>
         </motion.div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9, delay: 0.7, ease: EASE }}
-        className="absolute right-4 top-4 sm:right-6 sm:top-8 lg:-right-6"
-      >
-        <HarvestSeal />
-      </motion.div>
-    </div>
+      <div className="lg:col-span-5">
+        <motion.div
+          style={{ y }}
+          initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: EASE }}
+          className="relative"
+        >
+          <img
+            src={IMAGES.hero}
+            alt="Rangs de culture sur les hauteurs d’Apt à la fin du jour"
+            className="aspect-[4/5] w-full object-cover lg:aspect-[3/4]"
+          />
+          <p
+            className={`${TEXT} absolute bottom-0 left-0 bg-[#F2EFE9] px-4 py-3 text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/80`}
+          >
+            Récolte 2026 — Parcelle des Claparèdes
+          </p>
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
@@ -253,19 +246,19 @@ function Marquee() {
   const reduce = useReducedMotion();
 
   return (
-    <div className="overflow-hidden bg-[#1C231F] py-4">
+    <div className="overflow-hidden border-b border-[#1C231F]/15 bg-[#1C231F] py-3.5">
       <motion.div
         className="flex w-max whitespace-nowrap"
         animate={reduce ? undefined : { x: ['0%', '-50%'] }}
-        transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
       >
         {[0, 1].map((block) => (
           <span
             key={block}
             aria-hidden={block === 1}
-            className="font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-medium uppercase tracking-[0.22em] text-[#F2EFE9]"
+            className={`${TEXT} text-[0.75rem] tracking-[0.1em] text-[#F2EFE9]/90`}
           >
-            {MARQUEE_TEXT.repeat(4)}
+            {MARQUEE_TEXT.repeat(6)}
           </span>
         ))}
       </motion.div>
@@ -273,103 +266,190 @@ function Marquee() {
   );
 }
 
-function TerroirSection() {
+function Terroir() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [40, -40]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [30, -30]);
 
   return (
     <section
       id="terroir"
       ref={ref}
-      className="scroll-mt-28 px-6 py-28 sm:px-10 lg:py-40"
+      className="scroll-mt-12 grid grid-cols-1 items-center gap-14 border-b border-[#1C231F]/15 py-24 lg:grid-cols-12 lg:gap-0 lg:py-0"
     >
-      <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12 lg:gap-20">
-        <div className="lg:col-span-5">
-          <Reveal>
-            <div className="overflow-hidden">
-              <motion.img
-                style={{ y }}
-                src={IMAGES.terroir}
-                alt="Sols ocre et végétation sèche du plateau du Luberon"
-                className="aspect-[3/4] w-full scale-110 object-cover"
-              />
-            </div>
-          </Reveal>
+      <div className="order-2 px-6 sm:px-10 lg:order-1 lg:col-span-5 lg:py-32 lg:pl-0 lg:pr-16">
+        <div className="overflow-hidden">
+          <motion.img
+            style={{ y }}
+            src={IMAGES.terroir}
+            alt="Sols ocre et végétation sèche du plateau du Luberon"
+            className="aspect-[3/4] w-full scale-105 object-cover"
+          />
         </div>
+      </div>
 
-        <div className="lg:col-span-6 lg:col-start-7">
-          <Reveal>
-            <Eyebrow index="01" label="Le terroir" />
-            <h2
-              className={`font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] ${DISPLAY_M} font-bold uppercase leading-[1.02] tracking-tight`}
-            >
-              Une terre qui donne le ton
-            </h2>
-          </Reveal>
+      <div className="order-1 px-6 sm:px-10 lg:order-2 lg:col-span-6 lg:col-start-7 lg:py-32">
+        <Reveal>
+          <SectionHead
+            label="Le terroir"
+            title="Un sol qui force la plante à se concentrer"
+          />
+        </Reveal>
 
-          <Reveal delay={0.1}>
-            <p className="mt-8 max-w-md font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-base font-light leading-relaxed text-[#1C231F]/75">
-              L&apos;ocre du Luberon retient la chaleur et la restitue la nuit.
-              Nos plants poussent lentement, concentrent leurs terpènes, et
-              donnent une matière première dense, résineuse, impossible à
-              obtenir en culture forcée.
+        <Reveal delay={0.08}>
+          <div className={`${TEXT} mt-8 max-w-md space-y-5 text-[0.9375rem] leading-[1.75] text-[#1C231F]/80`}>
+            <p>
+              L’ocre retient la chaleur de la journée et la restitue une partie
+              de la nuit. Les plants poussent lentement, sans excès d’eau, et
+              concentrent leurs terpènes plutôt que leur biomasse.
             </p>
-          </Reveal>
+            <p>
+              C’est une matière première dense et résineuse, qu’aucune culture
+              sous serre ne reproduit. Le rendement en pâtit. Le profil
+              aromatique, non.
+            </p>
+          </div>
+        </Reveal>
 
-          <Reveal delay={0.2}>
-            <dl className="mt-14 grid grid-cols-1 gap-8 border-t border-[#1C231F]/15 pt-10 sm:grid-cols-3">
-              {STATS.map((stat) => (
-                <div key={stat.label}>
-                  <dt className="font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-3xl font-bold tracking-tight">
-                    {stat.value}
-                  </dt>
-                  <dd className="mt-2 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase leading-snug tracking-[0.18em] text-[#1C231F]/70">
-                    {stat.label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </div>
+        <Reveal delay={0.16}>
+          <dl className={`${TEXT} mt-14 max-w-md border-t border-[#1C231F]/20`}>
+            {FICHE.map((row) => (
+              <div
+                key={row.label}
+                className="flex items-baseline justify-between gap-8 border-b border-[#1C231F]/15 py-4"
+              >
+                <dt className="text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/70">
+                  {row.label}
+                </dt>
+                <dd className="text-right text-[0.875rem] tabular-nums">
+                  {row.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-function ProcessSection() {
+function Methode() {
   return (
     <section
       id="methode"
-      className="scroll-mt-28 px-6 pb-28 sm:px-10 lg:pb-40"
+      className="scroll-mt-12 border-b border-[#1C231F]/15 px-6 py-24 sm:px-10 lg:py-32"
     >
       <Reveal>
-        <Eyebrow index="02" label="La méthode" />
-        <h2
-          className={`mb-16 font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] ${DISPLAY_M} font-bold uppercase leading-[1.02] tracking-tight`}
-        >
-          Du champ au flacon
-        </h2>
+        <SectionHead
+          label="La méthode"
+          title="Quatre gestes, une seule saison"
+          className="mb-16"
+        />
       </Reveal>
 
-      <div className="border-t border-[#1C231F]/15">
+      <ol className="border-t border-[#1C231F]/20">
         {PROCESS.map(({ step, title, detail }, index) => (
           <Reveal key={step} delay={index * 0.05}>
-            <div className="grid grid-cols-1 gap-3 border-b border-[#1C231F]/15 py-10 transition-colors duration-500 hover:bg-[#1C231F]/[0.02] sm:grid-cols-12 sm:items-baseline sm:gap-10">
-              <span className="font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-bold tracking-[0.2em] text-[#C48B5E] sm:col-span-1">
+            <li className="grid grid-cols-1 gap-y-3 border-b border-[#1C231F]/15 py-9 sm:grid-cols-12 sm:gap-8">
+              <span
+                className={`${TEXT} text-[0.75rem] tabular-nums tracking-[0.16em] text-[#C48B5E] sm:col-span-1`}
+              >
                 {step}
               </span>
-              <h3 className="font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-xl font-semibold uppercase tracking-tight sm:col-span-4 lg:text-2xl">
+              <h3
+                className={`${DISPLAY} text-[1.375rem] font-semibold leading-tight tracking-[-0.01em] sm:col-span-4 lg:text-[1.5rem]`}
+              >
                 {title}
               </h3>
-              <p className="max-w-md font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-light leading-relaxed text-[#1C231F]/75 sm:col-span-7">
+              <p
+                className={`${TEXT} max-w-lg text-[0.9375rem] leading-[1.7] text-[#1C231F]/80 sm:col-span-7`}
+              >
                 {detail}
               </p>
-            </div>
+            </li>
+          </Reveal>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function Gamme() {
+  return (
+    <section
+      id="gamme"
+      className="scroll-mt-12 border-b border-[#1C231F]/15 px-6 py-24 sm:px-10 lg:py-32"
+    >
+      <Reveal>
+        <div className="mb-16 flex flex-wrap items-end justify-between gap-8">
+          <SectionHead label="La gamme" title="Trois formules, une récolte" />
+          <p
+            className={`${TEXT} max-w-xs text-[0.875rem] leading-[1.7] text-[#1C231F]/75`}
+          >
+            Chaque lot porte son numéro et son analyse. Quand la récolte est
+            épuisée, la référence disparaît jusqu’à l’année suivante.
+          </p>
+        </div>
+      </Reveal>
+
+      <div className="border-t border-[#1C231F]/20">
+        {PRODUCTS.map((product, index) => (
+          <Reveal key={product.ref} delay={index * 0.05}>
+            <article className="grid grid-cols-1 gap-6 border-b border-[#1C231F]/15 py-8 sm:grid-cols-12 sm:items-center sm:gap-8">
+              <div className="sm:col-span-3 lg:col-span-2">
+                <img
+                  src={product.image}
+                  alt={product.alt}
+                  className="aspect-[4/5] w-28 max-w-[9rem] object-cover sm:w-full"
+                />
+              </div>
+
+              <div className="sm:col-span-4 lg:col-span-3">
+                <p
+                  className={`${TEXT} text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/70`}
+                >
+                  {product.ref} — {product.strength}
+                </p>
+                <h3
+                  className={`${DISPLAY} mt-2 text-[1.375rem] font-semibold leading-tight tracking-[-0.01em]`}
+                >
+                  {product.name}
+                </h3>
+                <p
+                  className={`${TEXT} mt-1 text-[0.8125rem] text-[#1C231F]/75`}
+                >
+                  {product.origin}
+                </p>
+              </div>
+
+              <p
+                className={`${TEXT} max-w-sm text-[0.9375rem] leading-[1.7] text-[#1C231F]/80 sm:col-span-5 lg:col-span-4`}
+              >
+                {product.note}
+              </p>
+
+              <div className="flex items-baseline justify-between gap-6 sm:col-span-12 sm:justify-start lg:col-span-3 lg:justify-end">
+                <p className={`${TEXT} text-[0.8125rem] text-[#1C231F]/75`}>
+                  {product.volume}
+                </p>
+                <p
+                  className={`${DISPLAY} text-[1.25rem] font-semibold tabular-nums lg:w-24 lg:text-right`}
+                >
+                  {product.price}
+                </p>
+                <button
+                  type="button"
+                  aria-label={`Ajouter ${product.name} au panier`}
+                  className={`${TEXT} border border-[#1C231F] px-5 py-2.5 text-[0.75rem] font-medium uppercase tracking-[0.12em] transition-colors duration-200 hover:bg-[#1C231F] hover:text-[#F2EFE9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A7160]`}
+                >
+                  Ajouter
+                </button>
+              </div>
+            </article>
           </Reveal>
         ))}
       </div>
@@ -377,83 +457,58 @@ function ProcessSection() {
   );
 }
 
-function ProductCard({
-  product,
-  index,
-}: {
-  product: (typeof PRODUCTS)[number];
-  index: number;
-}) {
-  const { name, origin, tag, price, volume, image, alt } = product;
-
+function Engagement() {
   return (
-    <Reveal delay={index * 0.08} className="h-full">
-      <article className="group flex h-full flex-col border border-[#1C231F]/10 bg-[#FBFAF7] transition-colors duration-500 hover:border-[#1C231F]/25">
-        <div className="relative overflow-hidden">
-          <img
-            src={image}
-            alt={alt}
-            className="aspect-[4/5] w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
-          />
-          <span className="absolute left-4 top-4 rounded-full bg-[#F2EFE9] px-3 py-1 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-[10px] font-semibold uppercase tracking-[0.16em] text-[#1C231F]">
-            {tag}
-          </span>
-        </div>
+    <section className="border-b border-[#1C231F]/15 bg-[#1C231F] px-6 py-24 text-[#F2EFE9] sm:px-10 lg:py-32">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+        <p
+          className={`${TEXT} text-[0.6875rem] uppercase tracking-[0.2em] text-[#F2EFE9]/70 lg:col-span-3`}
+        >
+          Ce que nous ne faisons pas
+        </p>
 
-        <div className="flex flex-1 flex-col p-6">
-          <h3 className="font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-lg font-semibold uppercase leading-tight tracking-tight">
-            {name}
-          </h3>
-          <p className="mt-2 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-[0.16em] text-[#1C231F]/70">
-            {origin}
-          </p>
-
-          <div className="mt-auto flex items-baseline justify-between gap-4 border-t border-[#1C231F]/10 pt-6">
-            <p className="flex items-baseline gap-2">
-              <span className="font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-xl font-bold tracking-tight">
-                {price}
-              </span>
-              <span className="font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-[0.16em] text-[#1C231F]/70">
-                {volume}
-              </span>
-            </p>
-            <button
-              type="button"
-              aria-label={`Ajouter ${name} au panier`}
-              className="flex shrink-0 items-center gap-2 self-center rounded-full border border-[#1C231F]/30 px-5 py-2.5 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs font-semibold uppercase tracking-[0.16em] transition-colors duration-300 hover:border-[#1C231F] hover:bg-[#1C231F] hover:text-[#F2EFE9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A7160]"
+        <div className="lg:col-span-8 lg:col-start-5">
+          <Reveal>
+            <p
+              className={`${DISPLAY} max-w-2xl text-[clamp(1.5rem,2.8vw,2.25rem)] font-normal leading-[1.3] tracking-[-0.01em]`}
             >
-              Ajouter
-              <Plus className="h-3.5 w-3.5" strokeWidth={2.6} aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      </article>
-    </Reveal>
-  );
-}
+              Pas de culture sous serre, pas d’achat de matière première à
+              l’extérieur, pas de seconde récolte pour tenir le stock. Quand la
+              parcelle a donné, elle a donné.
+            </p>
+          </Reveal>
 
-function Manifesto() {
-  return (
-    <section className="bg-[#1C231F] px-6 py-28 text-[#F2EFE9] sm:px-10 lg:py-40">
-      <div className="mx-auto max-w-4xl">
-        <Reveal>
-          <p className="font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-[0.28em] text-[#F2EFE9]/60">
-            Manifeste
-          </p>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <blockquote className="mt-10 font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-[clamp(1.5rem,3.2vw,2.5rem)] font-bold uppercase leading-[1.15] tracking-tight [text-wrap:balance]">
-            Nous ne vendons pas du CBD. Nous mettons en flacon{' '}
-            <span className="text-[#C48B5E]">un versant du Luberon</span>, une
-            saison, et le travail de six paires de mains.
-          </blockquote>
-        </Reveal>
-        <Reveal delay={0.2}>
-          <p className="mt-10 flex items-center gap-4 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm text-[#F2EFE9]/70">
-            <span className="h-px w-10 bg-[#F2EFE9]/40" />
-            Camille Roux, fondatrice et productrice
-          </p>
-        </Reveal>
+          <Reveal delay={0.1}>
+            <dl
+              className={`${TEXT} mt-14 grid max-w-2xl grid-cols-1 gap-y-4 border-t border-[#F2EFE9]/25 pt-6 sm:grid-cols-2 sm:gap-x-10`}
+            >
+              <div className="flex justify-between gap-6 border-b border-[#F2EFE9]/15 pb-4 sm:border-none sm:pb-0">
+                <dt className="text-[0.8125rem] text-[#F2EFE9]/75">
+                  Surface cultivée
+                </dt>
+                <dd className="text-[0.8125rem] tabular-nums">4,2 hectares</dd>
+              </div>
+              <div className="flex justify-between gap-6 border-b border-[#F2EFE9]/15 pb-4 sm:border-none sm:pb-0">
+                <dt className="text-[0.8125rem] text-[#F2EFE9]/75">
+                  Récolte 2026
+                </dt>
+                <dd className="text-[0.8125rem] tabular-nums">1 840 flacons</dd>
+              </div>
+              <div className="flex justify-between gap-6 border-b border-[#F2EFE9]/15 pb-4 sm:border-none sm:pb-0">
+                <dt className="text-[0.8125rem] text-[#F2EFE9]/75">
+                  Analyses par lot
+                </dt>
+                <dd className="text-[0.8125rem] tabular-nums">3</dd>
+              </div>
+              <div className="flex justify-between gap-6">
+                <dt className="text-[0.8125rem] text-[#F2EFE9]/75">
+                  Teneur THC
+                </dt>
+                <dd className="text-[0.8125rem] tabular-nums">&lt; 0,3 %</dd>
+              </div>
+            </dl>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -463,24 +518,25 @@ function Newsletter() {
   const [status, setStatus] = useState('');
 
   return (
-    <section className="px-6 py-28 sm:px-10 lg:py-40">
-      <div className="grid grid-cols-1 gap-14 border border-[#1C231F]/15 p-8 lg:grid-cols-2 lg:gap-20 lg:p-16">
-        <Reveal>
-          <Eyebrow index="04" label="Carnet de récolte" />
-          <h2
-            className={`font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] ${DISPLAY_M} font-bold uppercase leading-[1.02] tracking-tight`}
-          >
-            Une lettre par saison
-          </h2>
-          <p className="mt-6 max-w-sm font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-light leading-relaxed text-[#1C231F]/75">
-            L&apos;avancée des parcelles, les analyses de lot, et
-            l&apos;ouverture des ventes en avant-première.
-          </p>
-        </Reveal>
+    <section className="border-b border-[#1C231F]/15 px-6 py-24 sm:px-10 lg:py-32">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <SectionHead
+            label="Carnet de récolte"
+            title="Une lettre par saison, pas davantage"
+          />
+        </div>
 
-        <Reveal delay={0.1} className="flex items-end">
+        <div className="lg:col-span-6 lg:col-start-7">
+          <p
+            className={`${TEXT} max-w-md text-[0.9375rem] leading-[1.75] text-[#1C231F]/80`}
+          >
+            L’avancée des parcelles, les analyses de lot dès leur publication, et
+            l’ouverture des ventes avant le reste de la liste.
+          </p>
+
           <form
-            className="w-full"
+            className="mt-10 max-w-md"
             noValidate
             onSubmit={(event) => {
               event.preventDefault();
@@ -489,247 +545,130 @@ function Newsletter() {
               ) as HTMLInputElement;
               setStatus(
                 field.checkValidity()
-                  ? 'Merci, vous recevrez notre prochaine lettre de récolte.'
+                  ? 'Inscription enregistrée. À la prochaine récolte.'
                   : 'Merci de renseigner une adresse e-mail valide.',
               );
             }}
           >
             <label
               htmlFor="newsletter-email"
-              className="font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-[0.2em] text-[#1C231F]/70"
+              className={`${TEXT} text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/70`}
             >
-              Votre adresse e-mail
+              Adresse e-mail
             </label>
-            <div className="mt-5 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-4 flex flex-col gap-4 sm:flex-row">
               <input
                 id="newsletter-email"
                 name="email"
                 type="email"
                 required
                 autoComplete="email"
-                placeholder="camille@domaine.fr"
-                className="w-full border-b border-[#1C231F]/30 bg-transparent pb-3 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-base placeholder:text-[#1C231F]/40 focus:border-[#5A7160] focus:outline-none"
+                placeholder="vous@exemple.fr"
+                className={`${TEXT} w-full border-b border-[#1C231F]/40 bg-transparent pb-3 text-[0.9375rem] placeholder:text-[#1C231F]/45 focus:border-[#5A7160] focus:outline-none`}
               />
               <button
                 type="submit"
-                className="flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#1C231F] px-7 py-4 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-semibold uppercase tracking-[0.16em] text-[#F2EFE9] transition-opacity duration-300 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A7160]"
+                className={`${TEXT} shrink-0 bg-[#1C231F] px-8 py-4 text-[0.8125rem] font-medium uppercase tracking-[0.12em] text-[#F2EFE9] transition-colors duration-200 hover:bg-[#5A7160] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A7160]`}
               >
-                S&apos;inscrire
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                S’inscrire
               </button>
             </div>
             <p
               role="status"
               aria-live="polite"
-              className="mt-4 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs text-[#5A7160]"
+              className={`${TEXT} mt-4 text-[0.8125rem] text-[#5A7160]`}
             >
               {status}
             </p>
           </form>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
 }
 
 export default function HerbeHarmonieLanding() {
-  const { scrollYProgress } = useScroll();
-
   return (
-    <div className="min-h-screen bg-[#F2EFE9] text-[#1C231F] antialiased selection:bg-[#5A7160] selection:text-[#F2EFE9]">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap');
-      `}</style>
+    <div
+      className={`${TEXT} min-h-screen bg-[#F2EFE9] text-[#1C231F] antialiased selection:bg-[#1C231F] selection:text-[#F2EFE9]`}
+    >
+      <style>{FONTS}</style>
 
-      <motion.div
-        style={{ scaleX: scrollYProgress }}
-        className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-[#C48B5E]"
-      />
-
-      <header className="sticky top-0 z-50 border-b border-[#1C231F]/10 bg-[#F2EFE9]/90 backdrop-blur-md">
-        <nav className="flex items-center justify-between px-6 py-5 sm:px-10">
-          <span className="font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-bold uppercase tracking-tight sm:text-base">
+      <header className="border-b border-[#1C231F]/15">
+        <div className="flex items-baseline justify-between px-6 py-5 sm:px-10">
+          <a href="#" className={`${DISPLAY} text-[1.0625rem] font-semibold tracking-[-0.01em]`}>
             Herbe &amp; Harmonie
-          </span>
-          <div className="hidden gap-10 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-[0.18em] md:flex">
-            <a href="#terroir" className="hover:text-[#5A7160]">
+          </a>
+          <nav className="flex items-baseline gap-8 text-[0.75rem] uppercase tracking-[0.14em]">
+            <a href="#terroir" className="hidden hover:text-[#5A7160] sm:inline">
               Terroir
             </a>
-            <a href="#methode" className="hover:text-[#5A7160]">
+            <a href="#methode" className="hidden hover:text-[#5A7160] sm:inline">
               Méthode
             </a>
-            <a href="#essentiels" className="hover:text-[#5A7160]">
-              Boutique
+            <a href="#gamme" className="hover:text-[#5A7160]">
+              Gamme
             </a>
-          </div>
-          <button
-            type="button"
-            className="flex items-center gap-2 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-[0.18em] hover:text-[#5A7160]"
-          >
-            <ShoppingBag className="h-4 w-4" strokeWidth={1.6} aria-hidden="true" />
-            Panier (0)
-          </button>
-        </nav>
+            <span className="text-[#1C231F]/70">Panier (0)</span>
+          </nav>
+        </div>
       </header>
 
-      <section className="grid grid-cols-1 items-center gap-16 px-6 pb-28 pt-12 sm:px-10 lg:grid-cols-2 lg:gap-20 lg:pb-40 lg:pt-20">
-        <div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="mb-8 flex items-start gap-3 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase leading-relaxed tracking-[0.28em] text-[#1C231F]/70"
-          >
-            <span className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-[#C48B5E]" />
-            Domaine artisanal, Apt — Vaucluse
-          </motion.p>
-
-          <h1
-            className={`font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] ${DISPLAY_XL} font-extrabold uppercase leading-[0.88] tracking-tight`}
-          >
-            <DisplayLine text="L'Or Vert" delay={0.1} />
-            <DisplayLine text="Du Luberon" delay={0.22} />
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.5, ease: EASE }}
-            className="mt-10 max-w-sm font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-base font-light leading-relaxed text-[#1C231F]/75"
-          >
-            Cultivé et récolté à la main sur les hauteurs d&apos;Apt, notre CBD
-            porte la lumière et l&apos;ocre du Luberon dans chaque formule.
-            Extraction à froid, circuit court, lot tracé.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.65, ease: EASE }}
-            className="mt-12 flex flex-wrap gap-4"
-          >
-            <a
-              href="#essentiels"
-              className="group flex items-center gap-3 rounded-full bg-[#1C231F] px-8 py-4 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-semibold uppercase tracking-[0.16em] text-[#F2EFE9] transition-opacity duration-300 hover:opacity-85"
-            >
-              Découvrir la gamme
-              <ArrowRight
-                aria-hidden="true"
-                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </a>
-            <a
-              href="#terroir"
-              className="rounded-full border border-[#1C231F] px-8 py-4 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-semibold uppercase tracking-[0.16em] transition-colors duration-300 hover:bg-[#1C231F] hover:text-[#F2EFE9]"
-            >
-              Notre terroir
-            </a>
-          </motion.div>
-        </div>
-
-        <HeroVisual />
-      </section>
-
+      <Hero />
       <Marquee />
-
-      <TerroirSection />
-
-      <ProcessSection />
-
-      <section
-        id="essentiels"
-        className="scroll-mt-28 px-6 pb-28 sm:px-10 lg:pb-40"
-      >
-        <Reveal>
-          <Eyebrow index="03" label="La gamme" />
-          <div className="mb-16 flex flex-wrap items-end justify-between gap-8">
-            <h2
-              className={`font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] ${DISPLAY_M} font-bold uppercase leading-[1.02] tracking-tight`}
-            >
-              Nos Essentiels
-            </h2>
-            <p className="max-w-xs font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm font-light leading-relaxed text-[#1C231F]/75">
-              Trois formules, une seule récolte. Chaque lot est analysé et
-              numéroté avant expédition.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {PRODUCTS.map((product, index) => (
-            <ProductCard key={product.name} product={product} index={index} />
-          ))}
-        </div>
-      </section>
-
-      <Manifesto />
-
+      <Terroir />
+      <Methode />
+      <Gamme />
+      <Engagement />
       <Newsletter />
 
-      <footer className="border-t border-[#1C231F]/10 px-6 pb-12 pt-20 sm:px-10">
-        <div className="grid grid-cols-2 gap-12 pb-20 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-sm lg:grid-cols-4">
+      <footer className="px-6 py-16 sm:px-10">
+        <div className="grid grid-cols-2 gap-10 text-[0.875rem] lg:grid-cols-4">
           <div>
-            <p className="mb-5 text-xs uppercase tracking-[0.2em] text-[#1C231F]/70">
+            <p className="mb-5 text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/70">
               Boutique
             </p>
-            <ul className="space-y-3 text-[#1C231F]/80">
+            <ul className="space-y-2.5 text-[#1C231F]/85">
               <li>Huiles</li>
               <li>Baumes</li>
               <li>Infusions</li>
-              <li>Coffrets</li>
             </ul>
           </div>
           <div>
-            <p className="mb-5 text-xs uppercase tracking-[0.2em] text-[#1C231F]/70">
+            <p className="mb-5 text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/70">
               Le domaine
             </p>
-            <ul className="space-y-3 text-[#1C231F]/80">
-              <li>Notre terroir</li>
-              <li>Méthode d&apos;extraction</li>
+            <ul className="space-y-2.5 text-[#1C231F]/85">
+              <li>Terroir</li>
+              <li>Méthode</li>
               <li>Analyses de lot</li>
-              <li>Visites à Apt</li>
             </ul>
           </div>
           <div>
-            <p className="mb-5 text-xs uppercase tracking-[0.2em] text-[#1C231F]/70">
+            <p className="mb-5 text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/70">
               Aide
             </p>
-            <ul className="space-y-3 text-[#1C231F]/80">
+            <ul className="space-y-2.5 text-[#1C231F]/85">
               <li>Livraison</li>
               <li>Retours</li>
               <li>Contact</li>
-              <li>CGV</li>
             </ul>
           </div>
           <div>
-            <p className="mb-5 text-xs uppercase tracking-[0.2em] text-[#1C231F]/70">
-              Domaine
+            <p className="mb-5 text-[0.6875rem] uppercase tracking-[0.16em] text-[#1C231F]/70">
+              Adresse
             </p>
-            <p className="leading-relaxed text-[#1C231F]/80">
+            <p className="leading-[1.7] text-[#1C231F]/85">
               Chemin des Claparèdes
               <br />
               84400 Apt, Vaucluse
-              <br />
-              France
             </p>
           </div>
         </div>
 
-        <p
-          aria-hidden="true"
-          className="select-none break-words border-t border-[#1C231F]/10 pt-12 font-['Syne',_ui-sans-serif,_system-ui,_sans-serif] text-[clamp(2.5rem,11vw,8rem)] font-extrabold uppercase leading-none tracking-tight text-[#1C231F]/10"
-        >
-          Herbe &amp; Harmonie
-        </p>
-
-        <div className="mt-12 flex flex-col gap-3 font-['Inter',_ui-sans-serif,_system-ui,_sans-serif] text-xs uppercase tracking-wider text-[#1C231F]/70 sm:flex-row sm:items-center sm:justify-between">
-          <span>
-            © {new Date().getFullYear()} Herbe &amp; Harmonie — Récolté et
-            façonné dans le Luberon
-          </span>
-          <span>
-            Produits conformes, THC &lt; 0,3 %. Vente interdite aux mineurs.
-          </span>
+        <div className="mt-16 flex flex-col gap-2 border-t border-[#1C231F]/15 pt-6 text-[0.75rem] text-[#1C231F]/70 sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} Herbe &amp; Harmonie</span>
+          <span>THC &lt; 0,3 %. Vente interdite aux mineurs.</span>
         </div>
       </footer>
     </div>
