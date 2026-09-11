@@ -2,6 +2,8 @@
 
 *Cible : DRH, élus CSE, Office Managers, Responsables Achats. Objectif unique : génération de leads via le formulaire de devis. Aucun paiement CB en ligne.*
 
+> **Note de conformité (à conserver hors export final) :** le contenu source de la page Facebook de la marque contient des formulations à risque au regard de la réglementation « zéro allégation thérapeutique » (slogan « Aromatique & médicinale », « Élixir Miraculeux », « sommeil profond et réparateur », produit « Équilibre Ménopause », « Détox »). Ces éléments ont été volontairement adaptés ou omis ci-dessous. Recommandation : revoir aussi la communication Facebook existante sur ces points.
+
 ---
 
 ## Section 1 — Hero Header
@@ -55,7 +57,7 @@ Des entreprises qui font le choix d'un bien-être authentique
 Pourquoi choisir Herbe et Harmonie ?
 
 **1. L'Artisanat et le Terroir**
-Nos tisanes et infusions sont composées à Apt, au cœur du Luberon. Chaque coffret est assemblé à la main dans notre atelier, en circuit court, avec des plantes sélectionnées pour leur origine et leur qualité.
+Le producteur, c'est nous. Pas d'intermédiaire, pas de circuit flou. Guillaume et Duna cultivent nos plantes à Lauris, en plein cœur du Luberon, et notre atelier de conditionnement se trouve à Apt. Quand 80 % du CBD vendu en France est importé, nous cultivons le nôtre à quelques kilomètres de notre atelier, en culture raisonnée et sans engrais chimiques. Chaque coffret est assemblé à la main, en circuit court, avec une traçabilité complète du champ jusqu'à votre entreprise.
 
 **2. L'Engagement RSE & Impact Carbone**
 Nos pochons sont en coton bio certifié GOTS. L'ensemble de notre production est basé en Provence-Alpes-Côte d'Azur, ce qui réduit les émissions liées au transport et soutient les objectifs de reporting ESRS de vos achats fournisseurs (Scope 3).
@@ -71,17 +73,17 @@ Aucune quantité minimale de commande. Nous organisons la livraison sur un site 
 
 ### Le Coffret « Onboarding Serein »
 *Pensé pour les Ressources Humaines*
-Un rituel de bienvenue pour vos nouveaux collaborateurs : sélection de tisanes provençales et infusion de bien-être, accompagnée d'une carte de bienvenue personnalisable à votre logo.
+Un rituel de bienvenue pour vos nouveaux collaborateurs : une infusion de la gamme Miyane, 100 % naturelle et sans arômes ajoutés, accompagnée d'une carte de bienvenue personnalisable à votre logo.
 **Fourchette indicative : 25 € à 40 € HT / unité**
 
 ### Le Coffret « Déconnexion Provençale »
 *Pensé pour les CSE — fin d'année*
-Un coffret pensé pour un rituel de retour au calme à domicile en soirée : tisanes de la gamme sérénité, accessoires de préparation, pochon en coton bio estampillé.
+Un coffret pensé pour un rituel de retour au calme à domicile en soirée : infusion du soir de la gamme Miyane, macérat huileux du Potager de la Garrigue, pochon en coton bio estampillé.
 **Fourchette indicative : 35 € à 60 € HT / unité**
 
 ### Le Coffret « Remerciement Premium »
 *Pensé pour la fidélisation client VIP*
-Une sélection haut de gamme de nos meilleures récoltes, présentée dans un écrin artisanal, pour remercier vos clients ou partenaires les plus fidèles.
+Une sélection haut de gamme de nos fleurs de CBD cultivées et récoltées à la main à Lauris (White Widow, Amnesia Haze, Purple Haze), présentée dans un écrin artisanal, pour remercier vos clients ou partenaires les plus fidèles.
 **Fourchette indicative : 60 € à 90 € HT / unité**
 
 **Personnalisation disponible sur chaque coffret**
@@ -143,3 +145,10 @@ Offrez à vos équipes un moment de sérénité qui porte vos valeurs
 `[ Recevoir mon devis sous 48h ]`
 
 *[Design Hint : sous le bouton, mention rassurante en petit texte : "Réponse garantie sous 48h ouvrées, sans engagement."]*
+
+### Coordonnées de l'atelier
+
+Herbe et Harmonie — Guillaume & Duna, producteurs
+107 rue Saint-Pierre, 84400 Apt, France
+Tél. 06 95 49 61 50 — herbeharmonie@gmail.com
+Culture à Lauris, conditionnement à Apt — Luberon, Provence-Alpes-Côte d'Azur
